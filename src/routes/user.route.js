@@ -4,8 +4,8 @@ import userController from "../controllers/user.controller.js";
 
 const router = express.Router();
 
-router.post("/staff/signup", authController.studentSignup);
-router.post("/student/signup", authController.staffSignup);
+router.post("/staff/signup", authController.staffSignup);
+router.post("/student/signup", authController.studentSignup);
 router.post("/login", authController.login);
 router.post("/forgotPassword", authController.forgotPassword);
 router.patch("/resetPassword/:token", authController.resetPassword);

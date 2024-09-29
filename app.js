@@ -9,6 +9,11 @@ const app = express();
 
 dotenv.config({ path: "config.env" });
 
+app.use(express.json({ limit: "2mb" }));
+app.use(express.urlencoded({ extended: true, limit: "2mb" }));
+
+await connectDatabase();
+
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/course", courseRouter);
 
@@ -20,6 +25,5 @@ app.use(globalErrorHandler);
 
 const port = process.env.PORT || 8080;
 app.listen(port, async () => {
-  await connectDatabase();
   console.log(`Database is connected and App is running on Port ${port}`);
 });

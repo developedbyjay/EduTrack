@@ -38,27 +38,29 @@ const createSendToken = (user, statusCode, res) => {
 };
 
 const studentSignup = catchAsync(async (req, res, next) => {
-  const newUser = await Staff.create({
+  const newUser = await Student.create({
     name: req.body.name,
     email: req.body.email,
     matric_no: req.body.matric_no,
     phone_number: req.body.phone_number,
     password: req.body.password,
     passwordConfirm: req.body.passwordConfirm,
+    role: "student",
   });
 
   createSendToken(newUser, 201, res);
 });
 
 const staffSignup = catchAsync(async (req, res, next) => {
-  const newUser = await Student.create({
+  console.log(req.body);
+  const newUser = await Staff.create({
     name: req.body.name,
     email: req.body.email,
     phone_number: req.body.phone_number,
     password: req.body.password,
+    role: "lecturer",
     passwordConfirm: req.body.passwordConfirm,
   });
-
   createSendToken(newUser, 201, res);
 });
 

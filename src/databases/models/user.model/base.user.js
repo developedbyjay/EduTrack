@@ -16,7 +16,6 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: [true, "Please tell us your name!"],
     },
-    matric_no: { type: String, required: [true, "Please provide your email"] },
     department: {
       type: String,
       default: "Information and Communication Technology",
@@ -57,7 +56,7 @@ const userSchema = new mongoose.Schema(
     },
     role: {
       type: String,
-      enum: ["student", "staff"],
+      enum: ["student", "lecturer"],
       default: "student",
     },
   },
