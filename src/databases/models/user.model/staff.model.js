@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import User from "./base.user";
+import User from "./base.user.js";
 import crypto from "crypto";
 import bcrypt from "bcrypt";
 import validator from "validator";

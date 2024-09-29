@@ -1,12 +1,12 @@
 import express from "express";
-import authController from "../controllers/auth.controller";
-import courseController from "../controllers/course.controller";
+import authController from "../controllers/auth.controller.js";
+import courseController from "../controllers/course.controller.js";
 
 const router = express.Router();
 
 router
   .route("/get-today-course")
-  .get(courseController.aliasTodayCourse, courseController.getAllCourse);
+  .get(courseController.getTodayCourse, courseController.getAllCourse);
 
 router
   .route("/")

@@ -1,6 +1,6 @@
-import express from express;
-import authController from './../controllers/authController';
-import userController from './../controllers/userController';
+import express from "express";
+import authController from "../controllers/auth.controller.js";
+import userController from "../controllers/user.controller.js";
 
 const router = express.Router();
 
@@ -31,4 +31,4 @@ router
   .patch(userController.updateUser)
   .delete(userController.deleteUser);
 
-  export {router as userRoute}
+export { router as userRouter };

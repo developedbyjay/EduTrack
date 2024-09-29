@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import User from "./base.user";
+import User from "./base.user.js";
 
 const studentSchema = new mongoose.Schema(
   {

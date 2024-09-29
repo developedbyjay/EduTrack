@@ -1,6 +1,6 @@
-import User from "../databases/models/user.model/base.user";
-import catchAsync from "./../utils/catchAsync";
-import factory from "../services/handler.service";
+import User from "../databases/models/user.model/base.user.js";
+import catchAsync from "./../utils/catchAsync.js";
+import factory from "../services/handler.service.js";
 
 const filterObj = (obj, ...allowedFields) => {
   const newObj = {};
@@ -10,12 +10,12 @@ const filterObj = (obj, ...allowedFields) => {
   return newObj;
 };
 
-exports.getMe = (req, res, next) => {
+const getMe = (req, res, next) => {
   req.params.id = req.user.id;
   next();
 };
 
-exports.updateMe = catchAsync(async (req, res, next) => {
+const updateMe = catchAsync(async (req, res, next) => {
   if (req.body.password || req.body.passwordConfirm) {
     return next(
       new AppError(
@@ -40,7 +40,7 @@ exports.updateMe = catchAsync(async (req, res, next) => {
   });
 });
 
-exports.deleteMe = catchAsync(async (req, res, next) => {
+const deleteMe = catchAsync(async (req, res, next) => {
   await User.findByIdAndUpdate(req.user.id, { active: false });
 
   res.status(204).json({
@@ -49,14 +49,14 @@ exports.deleteMe = catchAsync(async (req, res, next) => {
   });
 });
 
-exports.createUser = (req, res) => {
+const createUser = (req, res) => {
   res.status(500).json({
     status: "error",
     message: "This route is not defined! Please use /signup instead",
   });
 };
 
-exports.getAllUsers = catchAsync(async (req, res, next) => {
+const getAllUsers = catchAsync(async (req, res, next) => {
   const students = await User.find({ role: "Student" })
     .populate("courses")
     .populate("department");
@@ -64,7 +64,7 @@ exports.getAllUsers = catchAsync(async (req, res, next) => {
   return res.status(200).json({ status: "success", data: { users: students } });
 });
 
-exports.getUser = catchAsync(async (req, res, next) => {
+const getUser = catchAsync(async (req, res, next) => {
   const student = await User.findOne({ _id: req.params.id, role: "Student" })
     .populate("courses")
     .populate("department");
@@ -73,5 +73,16 @@ exports.getUser = catchAsync(async (req, res, next) => {
 });
 
 // Do NOT update passwords with this!
-exports.updateUser = factory.updateOne(User);
-exports.deleteUser = factory.deleteOne(User);
+const updateUser = factory.updateOne(User);
+const deleteUser = factory.deleteOne(User);
+
+export default {
+  updateMe,
+  updateUser,
+  deleteMe,
+  deleteUser,
+  getAllUsers,
+  getMe,
+  getUser,
+  createUser,
+};
