@@ -25,10 +25,10 @@ const userSchema = new mongoose.Schema(
       default: "Federal University of Technology, Akure",
     },
     photo: String,
-    course_form: String,
     phone_number: {
       type: String,
       required: [true, "Please Provide your phone number"],
+      unique: true,
     },
     password: {
       type: String,

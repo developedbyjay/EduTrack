@@ -52,7 +52,6 @@ const studentSignup = catchAsync(async (req, res, next) => {
 });
 
 const staffSignup = catchAsync(async (req, res, next) => {
-  console.log(req.body);
   const newUser = await Staff.create({
     name: req.body.name,
     email: req.body.email,

@@ -13,22 +13,26 @@ router.patch("/resetPassword/:token", authController.resetPassword);
 // Protect all routes after this middleware
 router.use(authController.protect);
 
+router.get("/studentProfile", userController.getMe, userController.getStudent);
+router.get("/lecturerProfile", userController.getMe, userController.getStaff);
 router.patch("/updateMyPassword", authController.updatePassword);
-router.get("/me", userController.getMe, userController.getUser);
 router.patch("/updateMe", userController.updateMe);
 router.delete("/deleteMe", userController.deleteMe);
 
 router.use(authController.restrictTo("lecturer"));
 
-router
-  .route("/")
-  .get(userController.getAllUsers)
-  .post(userController.createUser);
+router.route("/").get(userController.getAllUsers);
 
 router
-  .route("/:id")
-  .get(userController.getUser)
+  .route("/student/:id")
+  .get(userController.getStudent)
   .patch(userController.updateUser)
   .delete(userController.deleteUser);
+
+  router
+    .route("/staff/:id")
+    .get(userController.getStudent)
+    .patch(userController.updateUser)
+    .delete(userController.deleteUser);
 
 export { router as userRouter };

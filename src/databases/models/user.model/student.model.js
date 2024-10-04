@@ -6,13 +6,13 @@ const studentSchema = new mongoose.Schema(
     matric_no: {
       type: String,
       required: [true, "Please provide your matric number"],
+      unique: true,
     },
     department: {
       type: String,
       default: "Information and Communication Technology",
     },
     course_form: String,
-    department: { type: mongoose.Schema.Types.ObjectId, ref: "Department" },
     courses: [{ type: mongoose.Schema.Types.ObjectId, ref: "Course" }],
     enrolledDate: { type: Date, default: Date.now },
     level: {
@@ -27,13 +27,10 @@ const studentSchema = new mongoose.Schema(
         grade: String,
       },
     ],
-    attendance: [
-      {
-        course: { type: mongoose.Schema.Types.ObjectId, ref: "Attendance" },
-        date: { type: Date },
-        present: { type: Boolean, default: false },
-      },
-    ],
+    attendance: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Attendance",
+    },
   },
   {
     timestamps: true,

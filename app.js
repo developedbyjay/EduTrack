@@ -2,6 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import { userRouter } from "./src/routes/user.route.js";
 import { courseRouter } from "./src/routes/course.route.js";
+import { attendanceRouter } from "./src/routes/attendance.route.js";
 import { connectDatabase } from "./src/utils/connect.js";
 import globalErrorHandler from "./src/controllers/error.controller.js";
 
@@ -16,6 +17,7 @@ await connectDatabase();
 
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/course", courseRouter);
+app.use("/api/v1/attendance", attendanceRouter);
 
 app.all("*", (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
@@ -24,6 +26,7 @@ app.all("*", (req, res, next) => {
 app.use(globalErrorHandler);
 
 const port = process.env.PORT || 8080;
+
 app.listen(port, async () => {
   console.log(`Database is connected and App is running on Port ${port}`);
 });

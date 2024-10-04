@@ -6,11 +6,7 @@ import validator from "validator";
 
 const staffSchema = new mongoose.Schema(
   {
-    department: {
-      type: String,
-      default: "Information and Communication Technology",
-    },
-    department: { type: mongoose.Schema.Types.ObjectId, ref: "Department" },
+    department: [{ type: mongoose.Schema.Types.ObjectId, ref: "Department" }],
     courses: [{ type: mongoose.Schema.Types.ObjectId, ref: "Course" }],
   },
   {

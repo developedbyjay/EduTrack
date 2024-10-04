@@ -49,13 +49,6 @@ const deleteMe = catchAsync(async (req, res, next) => {
   });
 });
 
-const createUser = (req, res) => {
-  res.status(500).json({
-    status: "error",
-    message: "This route is not defined! Please use /signup instead",
-  });
-};
-
 const getAllUsers = catchAsync(async (req, res, next) => {
   const students = await User.find({ role: "Student" })
     .populate("courses")
@@ -64,16 +57,26 @@ const getAllUsers = catchAsync(async (req, res, next) => {
   return res.status(200).json({ status: "success", data: { users: students } });
 });
 
-const getUser = catchAsync(async (req, res, next) => {
+const getStudent = catchAsync(async (req, res, next) => {
   const student = await User.findOne({ _id: req.params.id, role: "Student" })
     .populate("courses")
-    .populate("department");
+    .populate("grades")
+    .populate("attendance");
 
   return res.status(200).json({ status: "success", data: { user: student } });
 });
 
+const getStaff = catchAsync(async (req, res, next) => {
+  const staff = await User.findOne({ _id: req.params.id, role: "Lecturer" })
+    .populate("courses")
+    .populate("department");
+
+  return res.status(200).json({ status: "success", data: { user: staff } });
+});
+
 // Do NOT update passwords with this!
 const updateUser = factory.updateOne(User);
+// --------
 const deleteUser = factory.deleteOne(User);
 
 export default {
@@ -83,6 +86,6 @@ export default {
   deleteUser,
   getAllUsers,
   getMe,
-  getUser,
-  createUser,
+  getStaff,
+  getStudent,
 };
