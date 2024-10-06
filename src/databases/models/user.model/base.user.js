@@ -16,10 +16,6 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: [true, "Please tell us your name!"],
     },
-    department: {
-      type: String,
-      default: "Information and Communication Technology",
-    },
     institution_name: {
       type: String,
       default: "Federal University of Technology, Akure",

@@ -52,24 +52,24 @@ const deleteMe = catchAsync(async (req, res, next) => {
 const getAllUsers = catchAsync(async (req, res, next) => {
   const students = await User.find({ role: "Student" })
     .populate("courses")
-    .populate("department");
+    // .populate("department");
 
   return res.status(200).json({ status: "success", data: { users: students } });
 });
 
 const getStudent = catchAsync(async (req, res, next) => {
-  const student = await User.findOne({ _id: req.params.id, role: "Student" })
+  const student = await User.findOne({ _id: req.params.id, role: "student" })
     .populate("courses")
-    .populate("grades")
+    // .populate("grades")
     .populate("attendance");
 
   return res.status(200).json({ status: "success", data: { user: student } });
 });
 
 const getStaff = catchAsync(async (req, res, next) => {
-  const staff = await User.findOne({ _id: req.params.id, role: "Lecturer" })
+  const staff = await User.findOne({ _id: req.params.id, role: "lecturer" })
     .populate("courses")
-    .populate("department");
+    // .populate("department");
 
   return res.status(200).json({ status: "success", data: { user: staff } });
 });

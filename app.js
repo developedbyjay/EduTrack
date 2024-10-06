@@ -5,6 +5,7 @@ import { courseRouter } from "./src/routes/course.route.js";
 import { attendanceRouter } from "./src/routes/attendance.route.js";
 import { connectDatabase } from "./src/utils/connect.js";
 import globalErrorHandler from "./src/controllers/error.controller.js";
+import AppError from "./src/utils/appError.js";
 
 const app = express();
 
@@ -25,7 +26,7 @@ app.all("*", (req, res, next) => {
 
 app.use(globalErrorHandler);
 
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 3000;
 
 app.listen(port, async () => {
   console.log(`Database is connected and App is running on Port ${port}`);

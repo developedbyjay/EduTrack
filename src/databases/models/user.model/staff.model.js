@@ -1,8 +1,6 @@
 import mongoose from "mongoose";
 import User from "./base.user.js";
-import crypto from "crypto";
-import bcrypt from "bcrypt";
-import validator from "validator";
+
 
 const staffSchema = new mongoose.Schema(
   {
@@ -15,4 +13,5 @@ const staffSchema = new mongoose.Schema(
 );
 
 const staff = User.discriminator("Staff", staffSchema);
+
 export default staff;

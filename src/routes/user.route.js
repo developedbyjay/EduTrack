@@ -31,7 +31,7 @@ router
 
   router
     .route("/staff/:id")
-    .get(userController.getStudent)
+    .get(userController.getStaff)
     .patch(userController.updateUser)
     .delete(userController.deleteUser);
 
