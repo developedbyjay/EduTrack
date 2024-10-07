@@ -6,7 +6,6 @@ const courseSchema = new mongoose.Schema({
   department: { type: mongoose.Schema.Types.ObjectId, ref: "Department" },
   creditUnits: { type: Number, required: true },
   lecturer: [{ type: mongoose.Schema.Types.ObjectId, ref: "Staff" }],
-  studentsEnrolled: [{ type: mongoose.Schema.Types.ObjectId, ref: "Student" }],
   semester: { type: String, enum: ["First", "Second"], required: true },
   schedule: [
     {

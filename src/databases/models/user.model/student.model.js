@@ -18,7 +18,7 @@ const studentSchema = new mongoose.Schema(
     level: {
       type: String,
       enum: ["100", "200", "300", "400", "500"],
-      default: "100",
+      default: "500",
     },
     grades: [
       {

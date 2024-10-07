@@ -3,7 +3,6 @@ import { promisify } from "util";
 import jwt from "jsonwebtoken";
 import catchAsync from "../utils/catchAsync.js";
 import AppError from "../utils/appError.js";
-import email from "../utils/email.js";
 import User from "../databases/models/user.model/base.user.js";
 import Staff from "../databases/models/user.model/staff.model.js";
 import Student from "../databases/models/user.model/student.model.js";
