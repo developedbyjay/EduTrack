@@ -20,11 +20,12 @@ app.use(express.urlencoded({ extended: true, limit: "2mb" }));
 
 await connectDatabase();
 
-app.use('/', (req, res) => {
+app.get('/', (req, res) => {
   res.status(200).json({
     status: "Edutrack Hosted Successfully"
   })
 })
+
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/course", courseRouter);
 app.use("/api/v1/attendance", attendanceRouter);
