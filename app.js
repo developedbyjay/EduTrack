@@ -1,5 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
+import cors from "cors";
 import { userRouter } from "./src/routes/user.route.js";
 import { courseRouter } from "./src/routes/course.route.js";
 import { attendanceRouter } from "./src/routes/attendance.route.js";
@@ -8,6 +9,9 @@ import globalErrorHandler from "./src/controllers/error.controller.js";
 import AppError from "./src/utils/appError.js";
 
 const app = express();
+
+app.use(cors());
+app.options("*", cors());
 
 dotenv.config({ path: "config.env" });
 
@@ -26,8 +30,4 @@ app.all("*", (req, res, next) => {
 
 app.use(globalErrorHandler);
 
-const port = process.env.PORT || 3000;
-
-app.listen(port, async () => {
-  console.log(`Database is connected and App is running on Port ${port}`);
-});
+export default app
